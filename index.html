@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAM3YEH - ياصيب لبنان السريع</title>
+    <title>JAM3YEH - يانصيب لبنان السريع</title>
     <meta name="description" content="العب واربح بثوانٍ! رهان من $1 إلى $100 - فرص أفضل وجوائز مضاعفة! Whish Money | USD | USDT">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -268,7 +268,7 @@
             50% { box-shadow: 0 6px 25px rgba(255, 215, 0, 0.8); }
         }
         
-        /* PAYMENT MODAL STYLES */
+        /* PAYMENT MODAL STYLES - HIDDEN BY DEFAULT */
         .modal {
             display: none;
             position: fixed;
@@ -279,12 +279,16 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             animation: fadeIn 0.3s;
+            align-items: center;
+            justify-content: center;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal.show { 
+            display: flex !important; 
+        }
         .modal-content {
             background: linear-gradient(135deg, #006633, #009900);
             padding: 30px;
@@ -578,7 +582,7 @@
         </div>
     </div>
 
-    <!-- PAYMENT MODAL -->
+    <!-- PAYMENT MODAL - HIDDEN BY DEFAULT -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -681,7 +685,7 @@
         };
 
         function initializeSharing() {
-            const shareText = "🇱🇧 JAM3YEH - يانصيب لبنان السريع! العب واربح بثانٍ! 💰🎰";
+            const shareText = "🇱🇧 JAM3YEH - يانصيب لبنان السريع! العب واربح بثوانٍ! 💰🎰";
             const encodedText = encodeURIComponent(shareText);
             const encodedUrl = encodeURIComponent(SITE_URL);
 
