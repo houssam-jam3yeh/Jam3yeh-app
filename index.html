@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAM3YEH - يانصيب لبنان السريع</title>
+    <title>JAM3YEH - ياصيب لبنان السريع</title>
     <meta name="description" content="العب واربح بثوانٍ! رهان من $1 إلى $100 - فرص أفضل وجوائز مضاعفة! Whish Money | USD | USDT">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -267,6 +267,164 @@
             0%, 100% { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); }
             50% { box-shadow: 0 6px 25px rgba(255, 215, 0, 0.8); }
         }
+        
+        /* PAYMENT MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal-content {
+            background: linear-gradient(135deg, #006633, #009900);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 3px solid #FFD700;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        .modal-header h2 {
+            color: #FFD700;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .game-summary {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        .game-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .game-summary-item:last-child { border-bottom: none; }
+        .game-summary-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95em;
+        }
+        .game-summary-value {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .payment-methods {
+            margin: 20px 0;
+        }
+        .payment-methods h3 {
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .payment-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .payment-option:hover {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.15);
+            transform: translateX(5px);
+        }
+        .payment-option.selected {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+            border-width: 3px;
+        }
+        .payment-icon {
+            font-size: 2.5em;
+            min-width: 50px;
+            text-align: center;
+        }
+        .payment-details {
+            flex: 1;
+        }
+        .payment-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+        .payment-desc {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .payment-fee {
+            font-size: 0.85em;
+            color: #00FF00;
+            margin-top: 3px;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal-btn.confirm {
+            background: #FFD700;
+            color: #006633;
+        }
+        .modal-btn.confirm:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+        }
+        .modal-btn.confirm:disabled {
+            background: #666;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        .modal-btn.cancel {
+            background: #ff4444;
+            color: white;
+        }
+        .modal-btn.cancel:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
         .success-message {
             position: fixed;
             top: 20px;
@@ -278,7 +436,7 @@
             border-radius: 10px;
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            z-index: 2000;
             animation: slideDown 0.3s ease-out;
         }
         @keyframes slideDown {
@@ -297,21 +455,6 @@
             color: #00FF00;
             margin-bottom: 15px;
         }
-        .payment-methods {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 15px 0;
-        }
-        .payment-method {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 25px;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            font-size: 1.1em;
-            font-weight: bold;
-        }
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -328,8 +471,8 @@
             .bet-options { grid-template-columns: 1fr; }
             .share-buttons { flex-direction: column; align-items: center; }
             .share-btn { width: 100%; max-width: 250px; }
-            .payment-methods { flex-direction: column; align-items: center; }
-            .payment-method { width: 100%; max-width: 250px; }
+            .modal-content { padding: 20px; width: 95%; }
+            .modal-buttons { flex-direction: column; }
         }
     </style>
 </head>
@@ -392,7 +535,7 @@
         </div>
 
         <div class="jackpot-display">
-            🎰 Win up to <span id="maxJackpot">$3,750,000</span>! 🎰
+            🎰 Win up to <span id="maxJackpot">$3,000,000</span>! 🎰
         </div>
 
         <div class="game-section">
@@ -409,7 +552,7 @@
 
             <div class="action-buttons">
                 <button class="random-btn" onclick="randomPick()">🎲 Random Pick</button>
-                <button class="play-btn" id="playBtn" onclick="playGame()" disabled>
+                <button class="play-btn" id="playBtn" onclick="openPaymentModal()" disabled>
                     🎮 PLAY NOW - $<span id="playBtnAmount">25</span>
                 </button>
                 <button class="clear-btn" onclick="clearSelection()">🗑️ Clear</button>
@@ -417,13 +560,11 @@
         </div>
 
         <div class="payment-info">
-            <h3>💳 طرق الدفع - Payment Methods</h3>
-            <div class="payment-methods">
-                <div class="payment-method">📱 Whish Money</div>
-                <div class="payment-method">💵 USD / Cards</div>
-                <div class="payment-method">🔷 USDT Crypto</div>
-            </div>
-            <p style="margin-top: 15px; opacity: 0.9;">
+            <h3>💳 طرق الدفع المتاحة - Available Payment Methods</h3>
+            <p style="margin: 10px 0; opacity: 0.9;">
+                📱 Whish Money • 💵 USD/Cards • 🔷 USDT Crypto
+            </p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
                 🔒 Safe & Secure - آمن ومضمون 100%
             </p>
         </div>
@@ -437,9 +578,84 @@
         </div>
     </div>
 
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💳 اختر طريقة الدفع</h2>
+                <p style="opacity: 0.9;">Choose Payment Method</p>
+            </div>
+
+            <div class="game-summary">
+                <div class="game-summary-item">
+                    <span class="game-summary-label">🎯 Your Numbers:</span>
+                    <span class="game-summary-value" id="modalNumbers">-</span>
+                </div>
+                <div class="game-summary-item">
+                    <span class="game-summary-label">💰 Bet Amount:</span>
+                    <span class="game-summary-value" id="modalBetAmount">$25</span>
+                </div>
+                <div class="game-summary-item">
+                    <span class="game-summary-label">🎊 Max Win:</span>
+                    <span class="game-summary-value" id="modalMaxWin">$3,000,000</span>
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <h3>Select Payment Method:</h3>
+                
+                <div class="payment-option" onclick="selectPayment('whish')">
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-details">
+                        <div class="payment-name">Whish Money</div>
+                        <div class="payment-desc">Lebanese mobile payment</div>
+                        <div class="payment-fee">✅ No fees • Instant</div>
+                    </div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('card')">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-details">
+                        <div class="payment-name">Credit/Debit Card</div>
+                        <div class="payment-desc">Visa, Mastercard, PayPal</div>
+                        <div class="payment-fee">✅ Secure • Fast</div>
+                    </div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('usdt')">
+                    <div class="payment-icon">🔷</div>
+                    <div class="payment-details">
+                        <div class="payment-name">USDT (Crypto)</div>
+                        <div class="payment-desc">Tether cryptocurrency</div>
+                        <div class="payment-fee">✅ Anonymous • Low fee</div>
+                    </div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('usd')">
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-details">
+                        <div class="payment-name">USD Cash</div>
+                        <div class="payment-desc">Meet in person (Beirut)</div>
+                        <div class="payment-fee">✅ Zero fees</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" id="confirmPaymentBtn" onclick="confirmPayment()" disabled>
+                    ✅ Confirm & Pay
+                </button>
+                <button class="modal-btn cancel" onclick="closePaymentModal()">
+                    ❌ Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let selectedNumbers = [];
         let currentBetAmount = 25;
+        let selectedPaymentMethod = null;
         let SITE_URL = window.location.href;
 
         // Prize multipliers
@@ -450,23 +666,22 @@
             100: {prize: 150, odds: "+100%"}
         };
 
+        const paymentMethods = {
+            whish: {name: "Whish Money", contact: "03 XXX XXX", instructions: "Send to phone number"},
+            card: {name: "Credit/Debit Card", contact: "PayPal: pay@jam3yeh.com", instructions: "Use PayPal or card"},
+            usdt: {name: "USDT Crypto", contact: "Wallet: TXxx...xxxx", instructions: "Send USDT to wallet"},
+            usd: {name: "USD Cash", contact: "Meet in Beirut", instructions: "Contact: +961 XX XXX XXX"}
+        };
+
         // Initialize on page load
         window.onload = function() {
             generateNumbers();
             initializeSharing();
             updatePrizeDisplay();
-            
-            // Update URL every few seconds in case of redirects
-            setInterval(() => {
-                if(SITE_URL !== window.location.href) {
-                    SITE_URL = window.location.href;
-                    initializeSharing();
-                }
-            }, 5000);
         };
 
         function initializeSharing() {
-            const shareText = "🇱🇧 JAM3YEH - يانصيب لبنان السريع! العب واربح بثوانٍ! رهان من $1-$100 💰🎰";
+            const shareText = "🇱🇧 JAM3YEH - يانصيب لبنان السريع! العب واربح بثانٍ! 💰🎰";
             const encodedText = encodeURIComponent(shareText);
             const encodedUrl = encodeURIComponent(SITE_URL);
 
@@ -504,7 +719,7 @@
                 document.execCommand('copy');
                 showSuccess('✅ Link copied! الرابط تم نسخه');
             } catch(err) {
-                showSuccess('❌ Copy failed. Manual copy: ' + text);
+                showSuccess('Copy link: ' + text);
             }
             document.body.removeChild(textArea);
         }
@@ -549,7 +764,6 @@
                 selectedNumbers.push(num);
                 btn.classList.add('selected');
             } else {
-                // Flash effect for max numbers
                 btn.style.background = '#ff4444';
                 setTimeout(() => btn.style.background = 'white', 200);
             }
@@ -581,7 +795,6 @@
                 if(!numbers.includes(num)) numbers.push(num);
             }
             
-            // Animate selection
             numbers.forEach((num, index) => {
                 setTimeout(() => {
                     const btn = document.querySelectorAll('.number-btn')[num-1];
@@ -598,34 +811,66 @@
             updateDisplay();
         }
 
-        function playGame() {
+        function openPaymentModal() {
             const multiplier = multipliers[currentBetAmount];
             const jackpot = (100000 * multiplier.prize).toLocaleString();
             
-            alert(`🎮 JAM3YEH - Game Started!\n\n` +
-                  `🎯 Your Numbers: ${selectedNumbers.sort((a,b) => a-b).join(', ')}\n` +
-                  `💰 Bet Amount: $${currentBetAmount}\n` +
-                  `🎊 Max Win: $${jackpot}\n` +
-                  `⚡ Better Odds: ${multiplier.odds}\n\n` +
-                  `💳 Choose payment method:\n` +
-                  `📱 Whish Money: 03 XXX XXX\n` +
-                  `💵 USD/Cards: PayPal/Visa\n` +
-                  `🔷 USDT: Crypto wallet\n\n` +
-                  `🔒 100% Safe & Secure\n` +
-                  `🇱🇧 Made in Lebanon`);
+            document.getElementById('modalNumbers').textContent = selectedNumbers.sort((a,b) => a-b).join(', ');
+            document.getElementById('modalBetAmount').textContent = `$${currentBetAmount}`;
+            document.getElementById('modalMaxWin').textContent = `$${jackpot}`;
+            
+            selectedPaymentMethod = null;
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('confirmPaymentBtn').disabled = true;
+            
+            document.getElementById('paymentModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
 
-        // Easter egg - Konami code
-        let konamiCode = [];
-        const konami = [38,38,40,40,37,39,37,39,66,65]; // Up,Up,Down,Down,Left,Right,Left,Right,B,A
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('confirmPaymentBtn').disabled = false;
+        }
+
+        function confirmPayment() {
+            if (!selectedPaymentMethod) return;
+            
+            const payment = paymentMethods[selectedPaymentMethod];
+            const multiplier = multipliers[currentBetAmount];
+            const jackpot = (100000 * multiplier.prize).toLocaleString();
+            
+            closePaymentModal();
+            
+            setTimeout(() => {
+                alert(`✅ JAM3YEH - Payment Confirmed!\n\n` +
+                      `🎯 Numbers: ${selectedNumbers.sort((a,b) => a-b).join(', ')}\n` +
+                      `💰 Amount: $${currentBetAmount}\n` +
+                      `🎊 Max Win: $${jackpot}\n\n` +
+                      `💳 Payment Method: ${payment.name}\n` +
+                      `📞 Contact: ${payment.contact}\n` +
+                      `📝 Instructions: ${payment.instructions}\n\n` +
+                      `🔒 Your ticket number: #${Math.floor(Math.random() * 1000000)}\n\n` +
+                      `Good luck! حظ سعيد! 🍀`);
+                
+                showSuccess('🎉 Game started! Check your numbers! اللعبة بدأت!');
+            }, 500);
+        }
+
+        // Close modal on outside click
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) closePaymentModal();
+        });
+
+        // ESC key closes modal
         document.addEventListener('keydown', function(e) {
-            konamiCode.push(e.keyCode);
-            if(konamiCode.length > 10) konamiCode.shift();
-            if(konamiCode.join(',') === konami.join(',')) {
-                showSuccess('🎉 KONAMI CODE ACTIVATED! Extra luck bonus! 🍀');
-                document.body.style.filter = 'hue-rotate(90deg)';
-                setTimeout(() => document.body.style.filter = '', 3000);
-            }
+            if (e.key === 'Escape') closePaymentModal();
         });
     </script>
 </body>
