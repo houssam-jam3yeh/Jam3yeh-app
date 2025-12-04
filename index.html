@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAM3YEH - يانصيب لبنان السريع</title>
+    <meta property="og:title" content="JAM3YEH - يانصيب لبنان السريع 🇱🇧">
+    <meta property="og:description" content="العب واربح بثوانٍ! رهان من $1 إلى $100 - فرص أفضل وجوائز مضاعفة! Whish Money | USD | USDT">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/006633/FFD700?text=JAM3YEH+🇱🇧">
+    <meta property="og:url" content="https://yoursite.com/jam3yeh">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -38,6 +44,73 @@
         @keyframes titleGlow {
             0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
             50% { text-shadow: 2px 2px 15px rgba(255, 215, 0, 0.7); }
+        }
+        .share-section {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .share-section h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .share-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            min-width: 120px;
+            justify-content: center;
+        }
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .share-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        .share-btn.telegram {
+            background: #0088cc;
+            color: white;
+        }
+        .share-btn.facebook {
+            background: #4267B2;
+            color: white;
+        }
+        .share-btn.twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+        .share-btn.copy {
+            background: #FFD700;
+            color: #006633;
+        }
+        .share-url {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            word-break: break-all;
         }
         .bet-levels {
             background: rgba(255, 215, 0, 0.1);
@@ -598,6 +671,14 @@
                 text-align: center;
                 gap: 5px;
             }
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .share-btn {
+                width: 100%;
+                max-width: 250px;
+            }
         }
         @media (max-width: 400px) {
             .numbers-grid {
@@ -622,6 +703,31 @@
                 <p style="margin-bottom: 10px; color: #FFD700; font-weight: bold;">ادفع بطريقتك المفضلة:</p>
                 <span style="font-size: 1.5em;">📱 💵 🔷</span>
                 <p style="font-size: 0.9em; margin-top: 8px;">Whish Money | USD | USDT</p>
+            </div>
+        </div>
+
+        <div class="share-section">
+            <h3>🚀 شارك مع الأصدقاء - Share with Friends</h3>
+            <p style="margin: 10px 0;">شارك رابط JAM3YEH واربح معاً!</p>
+            <div class="share-url" id="shareUrl">
+                https://jam3yeh.com
+            </div>
+            <div class="share-buttons">
+                <a href="#" class="share-btn whatsapp" id="whatsappBtn" target="_blank">
+                    <span>📱</span> WhatsApp
+                </a>
+                <a href="#" class="share-btn telegram" id="telegramBtn" target="_blank">
+                    <span>✈️</span> Telegram
+                </a>
+                <a href="#" class="share-btn facebook" id="facebookBtn" target="_blank">
+                    <span>📘</span> Facebook
+                </a>
+                <a href="#" class="share-btn twitter" id="twitterBtn" target="_blank">
+                    <span>🐦</span> Twitter
+                </a>
+                <button class="share-btn copy" onclick="copyShareLink()">
+                    <span>📋</span> Copy Link
+                </button>
             </div>
         </div>
 
@@ -720,7 +826,7 @@
         </div>
 
         <div class="jackpot-display">
-            🎰 اربح حتى <span id="maxJackpot">$2,500,000</span>! 🎰
+            🎰 اربح حتى <span id="maxJackpot">$3,750,000</span>! 🎰
         </div>
 
         <div class="quick-prizes">
@@ -728,23 +834,23 @@
             <div class="prize-grid" id="prizeGrid">
                 <div class="prize-item jackpot">
                     <div class="prize-match">🎊 6 أرقام</div>
-                    <div class="prize-amount" id="jackpotPrize">$2,500,000</div>
+                    <div class="prize-amount" id="jackpotPrize">$3,750,000</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">🎉 5+بونص</div>
-                    <div class="prize-amount" id="secondPrize">$250,000</div>
+                    <div class="prize-amount" id="secondPrize">$375,000</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">💰 5 أرقام</div>
-                    <div class="prize-amount" id="thirdPrize">$12,500</div>
+                    <div class="prize-amount" id="thirdPrize">$18,750</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">😊 4 أرقام</div>
-                    <div class="prize-amount" id="fourthPrize">$500</div>
+                    <div class="prize-amount" id="fourthPrize">$750</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">👍 3 أرقام</div>
-                    <div class="prize-amount" id="fifthPrize">$50</div>
+                    <div class="prize-amount" id="fifthPrize">$75</div>
                 </div>
             </div>
         </div>
@@ -833,6 +939,9 @@
             <button class="play-btn" onclick="playAgain()" style="margin-top: 20px;">
                 🔄 العب مرة أخرى - Play Again
             </button>
+            <button class="share-btn whatsapp" onclick="shareResult()" style="margin: 10px; background: #25D366;">
+                📱 شارك النتيجة - Share Result
+            </button>
         </div>
 
         <div class="footer">
@@ -851,6 +960,7 @@
         let selectedNumbers = [];
         let currentBetAmount = 25; // Default bet
         const WHISH_NUMBER = "03 123 456"; // ⚠️ CHANGE TO YOUR REAL WHISH NUMBER
+        const SITE_URL = "https://jam3yeh.com"; // ⚠️ CHANGE TO YOUR ACTUAL WEBSITE URL
 
         // Bet multipliers and odds improvement
         const betLevels = {
@@ -870,6 +980,55 @@
             4: 20,        // 4 numbers
             3: 2          // 3 numbers
         };
+
+        // Initialize sharing links
+        function initializeSharing() {
+            const shareText = "🇱🇧 JAM3YEH - يانصيب لبنان السريع! العب بثوانٍ، اربح بالآلاف! رهان من $1-$100، فرص أفضل وجوائز مضاعفة! 📱💵🔷";
+            const encodedText = encodeURIComponent(shareText);
+            const encodedUrl = encodeURIComponent(SITE_URL);
+
+            document.getElementById('shareUrl').textContent = SITE_URL;
+            
+            // WhatsApp
+            document.getElementById('whatsappBtn').href = 
+                `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+            
+            // Telegram
+            document.getElementById('telegramBtn').href = 
+                `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
+            
+            // Facebook
+            document.getElementById('facebookBtn').href = 
+                `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+            
+            // Twitter
+            document.getElementById('twitterBtn').href = 
+                `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+        }
+
+        function copyShareLink() {
+            const url = SITE_URL;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showSuccessMessage('✅ تم نسخ الرابط! - Link copied!\n' + url);
+                }).catch(() => {
+                    fallbackCopy(url);
+                });
+            } else {
+                fallbackCopy(url);
+            }
+        }
+
+        function shareResult() {
+            const prize = document.getElementById('winMessage').textContent;
+            const shareText = `🎊 لقد لعبت JAM3YEH! ${prize} تعال العب معي وأربح أكثر! 🇱🇧`;
+            const encodedText = encodeURIComponent(shareText);
+            const encodedUrl = encodeURIComponent(SITE_URL);
+            
+            const whatsappUrl = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+            window.open(whatsappUrl, '_blank');
+        }
 
         function selectBet(amount) {
             currentBetAmount = amount;
@@ -952,200 +1111,4 @@
                 display.textContent = 'اختر 6 أرقام للمتابعة - Select 6 numbers to continue';
                 playBtn.disabled = true;
             } else if(selectedNumbers.length < 6) {
-                const remaining = 6 - selectedNumbers.length;
-                display.innerHTML = `
-                    ${selectedNumbers.sort((a,b) => a-b).join(' - ')} 
-                    <br><span style="font-size: 0.9em; opacity: 0.8;">
-                    (${remaining} أرقام متبقية - ${remaining} numbers remaining)
-                    </span>
-                `;
-                playBtn.disabled = true;
-            } else {
-                display.innerHTML = `
-                    ${selectedNumbers.sort((a,b) => a-b).join(' - ')} ✅
-                    <br><span style="font-size: 0.9em; color: #00FF00;">
-                    جاهز للعب! - Ready to play!
-                    </span>
-                `;
-                playBtn.disabled = false;
-            }
-        }
-
-        function randomPick() {
-            clearSelection();
-            const buttons = document.querySelectorAll('.number-btn');
-            
-            let count = 0;
-            const interval = setInterval(() => {
-                if(count >= 6) {
-                    clearInterval(interval);
-                    updateSelectionDisplay();
-                    return;
-                }
-                
-                let num;
-                do {
-                    num = Math.floor(Math.random() * 42) + 1;
-                } while(selectedNumbers.includes(num));
-                
-                selectedNumbers.push(num);
-                buttons[num-1].classList.add('selected');
-                count++;
-                updateSelectionDisplay();
-            }, 200);
-        }
-
-        function clearSelection() {
-            selectedNumbers = [];
-            document.querySelectorAll('.number-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            updateSelectionDisplay();
-        }
-
-        function showPayment() {
-            if(selectedNumbers.length !== 6) return;
-            
-            document.getElementById('paymentSection').style.display = 'block';
-            document.getElementById('paymentSection').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
-            });
-        }
-
-        function selectWhish() {
-            document.querySelector('.payment-options').style.display = 'none';
-            document.getElementById('wishDetails').style.display = 'block';
-        }
-
-        function closeWhish() {
-            document.querySelector('.payment-options').style.display = 'grid';
-            document.getElementById('wishDetails').style.display = 'none';
-        }
-
-        function copyWhishNumber() {
-            const number = WHISH_NUMBER;
-            
-            // Try modern clipboard API first
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(number).then(() => {
-                    showSuccessMessage('✅ تم نسخ رقم Whish! - Whish number copied!\n' + number);
-                }).catch(() => {
-                    fallbackCopy(number);
-                });
-            } else {
-                fallbackCopy(number);
-            }
-        }
-
-        function fallbackCopy(text) {
-            const tempInput = document.createElement('input');
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999); // For mobile devices
-            
-            try {
-                document.execCommand('copy');
-                showSuccessMessage('✅ تم نسخ رقم Whish! - Whish number copied!\n' + text);
-            } catch (err) {
-                alert('رقم Whish: ' + text + '\nWhish Number: ' + text);
-            }
-            
-            document.body.removeChild(tempInput);
-        }
-
-        function showSuccessMessage(message) {
-            // Create temporary success message
-            const successDiv = document.createElement('div');
-            successDiv.className = 'success-message';
-            successDiv.textContent = message;
-            
-            const wishDetails = document.getElementById('wishDetails');
-            wishDetails.insertBefore(successDiv, wishDetails.firstChild);
-            
-            setTimeout(() => {
-                if (successDiv.parentNode) {
-                    successDiv.parentNode.removeChild(successDiv);
-                }
-            }, 3000);
-        }
-
-        function confirmWhishPayment() {
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.innerHTML = '<span class="loading-spinner"></span>⏳ جاري التحقق... - Verifying...';
-            btn.disabled = true;
-            
-            // Simulate verification delay
-            setTimeout(() => {
-                playGame('WHISH');
-            }, 2000);
-        }
-
-        function payAndPlay(currency) {
-            const btn = event.target.closest('.payment-btn');
-            const originalContent = btn.innerHTML;
-            btn.innerHTML = `<div class="loading-spinner"></div><div style="color: #FFD700;">⏳ جاري المعالجة... - Processing...</div>`;
-            btn.style.pointerEvents = 'none';
-            
-            setTimeout(() => {
-                playGame(currency);
-            }, 2000);
-        }
-
-        function playGame(currency) {
-            // Hide payment section
-            document.getElementById('paymentSection').style.display = 'none';
-            
-            // Generate winning numbers (6 unique numbers from 1-42)
-            const winningNums = [];
-            while(winningNums.length < 6) {
-                const num = Math.floor(Math.random() * 42) + 1;
-                if(!winningNums.includes(num)) winningNums.push(num);
-            }
-            winningNums.sort((a,b) => a-b);
-
-            // Generate bonus number (different from winning numbers)
-            let bonusNum;
-            do {
-                bonusNum = Math.floor(Math.random() * 42) + 1;
-            } while(winningNums.includes(bonusNum));
-
-            // Improved odds calculation based on bet level
-            const betLevel = betLevels[currentBetAmount];
-            const oddsImprovement = betLevel.oddsBonus;
-            
-            // Apply odds improvement (higher bets get better chances)
-            let matches = selectedNumbers.filter(n => winningNums.includes(n)).length;
-            const hasBonus = selectedNumbers.includes(bonusNum);
-            
-            // Odds improvement logic - higher bets get bonus matches
-            if(oddsImprovement > 0) {
-                const bonusChance = Math.random();
-                if(bonusChance < oddsImprovement * 0.3) { // Up to 30% chance for bonus match
-                    if(matches < 6 && Math.random() < 0.4) {
-                        matches += 1; // Bonus match for higher bets
-                    }
-                }
-            }
-            
-            const matchedNumbers = selectedNumbers.filter(n => winningNums.includes(n));
-            const multiplier = betLevel.multiplier;
-            
-            let prize = 0;
-            let message = '';
-            let paymentMethod = '';
-            
-            // Payment method display
-            if(currency === 'WHISH') {
-                paymentMethod = ' (عبر Whish Money)';
-            } else if(currency === 'USD') {
-                paymentMethod = ' USD';
-            } else {
-                paymentMethod = ' USDT';
-            }
-            
-            // Prize structure with multipliers
-            if(matches === 6) {
-                prize
+                const remaining
