@@ -33,6 +33,102 @@
             color: #FFD700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             margin: 10px 0;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            50% { text-shadow: 2px 2px 15px rgba(255, 215, 0, 0.7); }
+        }
+        .bet-levels {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .bet-levels h3 {
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .bet-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .bet-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .bet-option:hover {
+            transform: translateY(-3px);
+            border-color: #FFD700;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        .bet-option.selected {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+            transform: scale(1.05);
+        }
+        .bet-amount {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 8px;
+        }
+        .bet-multiplier {
+            font-size: 1.1em;
+            color: #00FF00;
+            margin-bottom: 5px;
+        }
+        .win-chances {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        .odds-section {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #FF6B35;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .odds-section h3 {
+            color: #FF6B35;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .odds-table {
+            display: grid;
+            gap: 10px;
+        }
+        .odds-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            align-items: center;
+        }
+        .odds-match {
+            font-weight: bold;
+        }
+        .odds-ratio {
+            text-align: center;
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .odds-prize {
+            text-align: right;
+            color: #00FF00;
+            font-weight: bold;
         }
         .simple-steps {
             display: grid;
@@ -46,6 +142,10 @@
             padding: 20px;
             border-radius: 15px;
             border: 2px solid #FFD700;
+            transition: transform 0.3s;
+        }
+        .step:hover {
+            transform: translateY(-5px);
         }
         .step-number {
             background: #FFD700;
@@ -99,11 +199,20 @@
             border-radius: 10px;
             text-align: center;
             border: 1px solid rgba(255, 215, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        .prize-item:hover {
+            transform: scale(1.05);
         }
         .prize-item.jackpot {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3));
             border: 2px solid #FFD700;
             font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
         .prize-match {
             font-size: 1.1em;
@@ -135,6 +244,11 @@
             font-size: 1.4em;
             font-weight: bold;
             color: #FFD700;
+            animation: priceGlow 3s ease-in-out infinite;
+        }
+        @keyframes priceGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
         }
         .numbers-grid {
             display: grid;
@@ -160,11 +274,15 @@
             background: #FFD700;
             transform: scale(1.05);
         }
+        .number-btn:active {
+            transform: scale(0.95);
+        }
         .number-btn.selected {
             background: #FFD700;
             color: #006633;
             border-color: #FFA500;
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.5);
         }
         .selected-display {
             background: rgba(255, 215, 0, 0.2);
@@ -177,6 +295,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border: 2px solid rgba(255, 215, 0, 0.5);
         }
         .payment-section {
             background: rgba(0, 255, 0, 0.1);
@@ -225,6 +344,9 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+        .payment-btn:active {
+            transform: translateY(-1px);
+        }
         .payment-icon {
             font-size: 2em;
             margin-bottom: 8px;
@@ -264,11 +386,17 @@
             background: #FFD700;
             color: #006633;
             font-size: 1.3em;
+            animation: playPulse 2s infinite;
+        }
+        @keyframes playPulse {
+            0%, 100% { box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6); }
         }
         .play-btn:disabled {
             background: #666;
             color: #ccc;
             cursor: not-allowed;
+            animation: none;
         }
         .clear-btn {
             background: #ff4444;
@@ -278,6 +406,9 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
         .whish-details {
             background: rgba(255, 107, 53, 0.2);
             padding: 15px;
@@ -285,6 +416,7 @@
             margin: 15px 0;
             text-align: center;
             display: none;
+            border: 2px solid rgba(255, 107, 53, 0.5);
         }
         .whish-number {
             background: white;
@@ -296,6 +428,7 @@
             margin: 10px 0;
             font-family: monospace;
             letter-spacing: 2px;
+            border: 2px solid #FF6B35;
         }
         .copy-btn {
             background: #FFD700;
@@ -306,9 +439,11 @@
             cursor: pointer;
             font-weight: bold;
             margin: 10px 5px;
+            transition: all 0.3s;
         }
         .copy-btn:hover {
             background: #FFA500;
+            transform: scale(1.05);
         }
         .result-section {
             background: rgba(255, 215, 0, 0.1);
@@ -317,6 +452,7 @@
             margin: 20px 0;
             text-align: center;
             display: none;
+            border: 2px solid #FFD700;
         }
         .result-numbers {
             display: flex;
@@ -349,6 +485,7 @@
         .result-number.bonus.match {
             background: #FF4444;
             color: white;
+            animation: bounce 1s infinite;
         }
         @keyframes bounce {
             0%, 100% { transform: scale(1); }
@@ -374,13 +511,57 @@
             border-radius: 10px;
             margin: 15px 0;
             text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
-        .payment-methods-banner img {
-            max-width: 80px;
-            margin: 0 10px;
-            opacity: 0.9;
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
         }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-message {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00FF00;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+            color: #00FF00;
+            font-weight: bold;
+        }
+        .error-flash {
+            animation: errorFlash 0.5s;
+        }
+        @keyframes errorFlash {
+            0%, 100% { background: white; }
+            50% { background: #ff4444; }
+        }
+        .current-bet-display {
+            background: rgba(255, 215, 0, 0.3);
+            border: 2px solid #FFD700;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Mobile Optimizations */
         @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
             .numbers-grid {
                 grid-template-columns: repeat(6, 1fr);
                 gap: 6px;
@@ -392,9 +573,40 @@
             .payment-options {
                 grid-template-columns: 1fr;
             }
-            h1 { font-size: 2em; }
+            .bet-options {
+                grid-template-columns: 1fr;
+            }
             .simple-steps {
                 grid-template-columns: 1fr;
+            }
+            .prize-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            button {
+                width: 100%;
+                max-width: 280px;
+            }
+            .jackpot-display {
+                font-size: 1.5em;
+            }
+            .odds-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 5px;
+            }
+        }
+        @media (max-width: 400px) {
+            .numbers-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 4px;
+            }
+            .number-btn {
+                padding: 8px 4px;
+                font-size: 0.9em;
             }
         }
     </style>
@@ -408,90 +620,166 @@
             
             <div class="payment-methods-banner">
                 <p style="margin-bottom: 10px; color: #FFD700; font-weight: bold;">ادفع بطريقتك المفضلة:</p>
-                <span style="font-size: 1.5em;">💳 💵 🔷 📱</span>
-                <p style="font-size: 0.9em; margin-top: 8px;">Whish Money | USD | USDT | Cards</p>
+                <span style="font-size: 1.5em;">📱 💵 🔷</span>
+                <p style="font-size: 0.9em; margin-top: 8px;">Whish Money | USD | USDT</p>
             </div>
         </div>
 
         <div class="simple-steps">
             <div class="step">
                 <div class="step-number">1</div>
+                <h4>اختر مبلغ الرهان</h4>
+                <p>Choose Bet Amount</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
                 <h4>اختر 6 أرقام</h4>
                 <p>Pick 6 Numbers</p>
             </div>
             <div class="step">
-                <div class="step-number">2</div>
-                <h4>ادفع $1</h4>
-                <p>Pay $1</p>
-            </div>
-            <div class="step">
                 <div class="step-number">3</div>
-                <h4>اربح فوراً!</h4>
-                <p>Win Instantly!</p>
+                <h4>ادفع واربح!</h4>
+                <p>Pay & Win!</p>
             </div>
+        </div>
+
+        <div class="bet-levels">
+            <h3>💰 اختر مبلغ الرهان - Choose Your Bet Amount</h3>
+            <div class="bet-options">
+                <div class="bet-option" data-amount="1" onclick="selectBet(1)">
+                    <div class="bet-amount">$1</div>
+                    <div class="bet-multiplier">1x الجوائز - 1x Prizes</div>
+                    <div class="win-chances">فرص عادية - Normal Odds</div>
+                </div>
+                <div class="bet-option" data-amount="5" onclick="selectBet(5)">
+                    <div class="bet-amount">$5</div>
+                    <div class="bet-multiplier">6x الجوائز - 6x Prizes</div>
+                    <div class="win-chances">فرص أفضل +20% - +20% Better Odds</div>
+                </div>
+                <div class="bet-option" data-amount="10" onclick="selectBet(10)">
+                    <div class="bet-amount">$10</div>
+                    <div class="bet-multiplier">12x الجوائز - 12x Prizes</div>
+                    <div class="win-chances">فرص رائعة +40% - +40% Great Odds</div>
+                </div>
+                <div class="bet-option selected" data-amount="25" onclick="selectBet(25)">
+                    <div class="bet-amount">$25</div>
+                    <div class="bet-multiplier">30x الجوائز - 30x Prizes</div>
+                    <div class="win-chances">فرص ممتازة +60% - +60% Excellent Odds</div>
+                </div>
+                <div class="bet-option" data-amount="50" onclick="selectBet(50)">
+                    <div class="bet-amount">$50</div>
+                    <div class="bet-multiplier">65x الجوائز - 65x Prizes</div>
+                    <div class="win-chances">فرص استثنائية +80% - +80% Exceptional Odds</div>
+                </div>
+                <div class="bet-option" data-amount="100" onclick="selectBet(100)">
+                    <div class="bet-amount">$100</div>
+                    <div class="bet-multiplier">150x الجوائز - 150x Prizes</div>
+                    <div class="win-chances">فرص لا تُصدق +100% - +100% Incredible Odds</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="odds-section">
+            <h3>📊 نسب الفوز - Winning Odds & Ratios</h3>
+            <div class="odds-table">
+                <div class="odds-row" style="background: rgba(255, 215, 0, 0.2); font-weight: bold;">
+                    <div class="odds-match">النتيجة - Match</div>
+                    <div class="odds-ratio">النسبة - Ratio</div>
+                    <div class="odds-prize">الجائزة - Base Prize</div>
+                </div>
+                <div class="odds-row">
+                    <div class="odds-match">🎊 6 أرقام - 6 Numbers</div>
+                    <div class="odds-ratio">1 في 5,245,786</div>
+                    <div class="odds-prize">$100,000</div>
+                </div>
+                <div class="odds-row">
+                    <div class="odds-match">🎉 5+بونص - 5+Bonus</div>
+                    <div class="odds-ratio">1 في 2,330,636</div>
+                    <div class="odds-prize">$10,000</div>
+                </div>
+                <div class="odds-row">
+                    <div class="odds-match">💰 5 أرقام - 5 Numbers</div>
+                    <div class="odds-ratio">1 في 55,491</div>
+                    <div class="odds-prize">$500</div>
+                </div>
+                <div class="odds-row">
+                    <div class="odds-match">😊 4 أرقام - 4 Numbers</div>
+                    <div class="odds-ratio">1 في 1,083</div>
+                    <div class="odds-prize">$20</div>
+                </div>
+                <div class="odds-row">
+                    <div class="odds-match">👍 3 أرقام - 3 Numbers</div>
+                    <div class="odds-ratio">1 في 57</div>
+                    <div class="odds-prize">$2</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 15px; color: #FFD700; font-weight: bold;">
+                ⚡ الرهانات الأكبر = فرص أفضل + جوائز مضاعفة!<br>
+                ⚡ Higher Bets = Better Odds + Multiplied Prizes!
+            </p>
         </div>
 
         <div class="jackpot-display">
-            🎰 اربح حتى $100,000! 🎰
+            🎰 اربح حتى <span id="maxJackpot">$2,500,000</span>! 🎰
         </div>
 
         <div class="quick-prizes">
-            <h3>🏆 الجوائز السريعة</h3>
-            <div class="prize-grid">
+            <h3>🏆 الجوائز حسب الرهان - Prizes by Bet Level</h3>
+            <div class="prize-grid" id="prizeGrid">
                 <div class="prize-item jackpot">
                     <div class="prize-match">🎊 6 أرقام</div>
-                    <div class="prize-amount">$100,000</div>
+                    <div class="prize-amount" id="jackpotPrize">$2,500,000</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">🎉 5+بونص</div>
-                    <div class="prize-amount">$10,000</div>
+                    <div class="prize-amount" id="secondPrize">$250,000</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">💰 5 أرقام</div>
-                    <div class="prize-amount">$500</div>
+                    <div class="prize-amount" id="thirdPrize">$12,500</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">😊 4 أرقام</div>
-                    <div class="prize-amount">$20</div>
+                    <div class="prize-amount" id="fourthPrize">$500</div>
                 </div>
                 <div class="prize-item">
                     <div class="prize-match">👍 3 أرقام</div>
-                    <div class="prize-amount">$2</div>
+                    <div class="prize-amount" id="fifthPrize">$50</div>
                 </div>
             </div>
         </div>
 
         <div class="game-section">
-            <div class="game-title">🎮 ابدأ اللعب الآن!</div>
+            <div class="game-title">🎮 ابدأ اللعب الآن! - Start Playing!</div>
             
-            <div class="ticket-price">
-                🎫 تذكرة واحدة = $1 فقط!
+            <div class="current-bet-display" id="currentBetDisplay">
+                🎫 رهانك الحالي: $25 - فرص +60% - جوائز مضاعفة 30x
             </div>
 
             <h3 style="text-align: center; color: #FFD700; margin: 20px 0;">
-                اختر 6 أرقام من 42:
+                اختر 6 أرقام من 42 - Pick 6 numbers from 42:
             </h3>
             <div class="numbers-grid" id="numbersGrid"></div>
 
             <div class="selected-display">
-                <div style="margin-bottom: 10px;">أرقامك المختارة:</div>
+                <div style="margin-bottom: 10px;">أرقامك المختارة - Your Selected Numbers:</div>
                 <div id="selectedNumbers" style="font-size: 1.5em; color: #FFD700;">
-                    اختر 6 أرقام للمتابعة
+                    اختر 6 أرقام للمتابعة - Select 6 numbers to continue
                 </div>
             </div>
 
             <div class="action-buttons">
-                <button class="random-btn" onclick="randomPick()">🎲 اختيار عشوائي</button>
+                <button class="random-btn" onclick="randomPick()">🎲 اختيار عشوائي - Random Pick</button>
                 <button class="play-btn" id="playBtn" onclick="showPayment()" disabled>
-                    🎮 العب الآن - $1
+                    🎮 العب الآن - PLAY NOW - $<span id="playBtnAmount">25</span>
                 </button>
-                <button class="clear-btn" onclick="clearSelection()">🗑️ مسح</button>
+                <button class="clear-btn" onclick="clearSelection()">🗑️ مسح - Clear</button>
             </div>
         </div>
 
         <div class="payment-section" id="paymentSection">
             <h3 style="text-align: center; color: #FFD700; margin-bottom: 15px;">
-                💳 اختر طريقة الدفع
+                💳 اختر طريقة الدفع - Choose Payment Method
             </h3>
             <div class="payment-options">
                 <div class="payment-btn whish" onclick="selectWhish()">
@@ -501,7 +789,7 @@
                 </div>
                 <div class="payment-btn usd" onclick="payAndPlay('USD')">
                     <div class="payment-icon">💵</div>
-                    <div class="payment-name">USD / Card</div>
+                    <div class="payment-name">USD / Cards</div>
                     <div class="payment-desc">PayPal, Visa, Mastercard</div>
                 </div>
                 <div class="payment-btn usdt" onclick="payAndPlay('USDT')">
@@ -513,50 +801,117 @@
 
             <div class="whish-details" id="wishDetails">
                 <h4 style="color: #FF6B35; margin-bottom: 15px;">📱 الدفع عبر Whish Money</h4>
-                <p style="margin: 10px 0;">أرسل $1.00 إلى رقم Whish:</p>
+                <p style="margin: 10px 0;">أرسل $<span id="whishAmount">25</span> إلى رقم Whish:</p>
                 <div class="whish-number" id="whishNumber">03 123 456</div>
-                <button class="copy-btn" onclick="copyWhishNumber()">📋 نسخ الرقم</button>
+                <button class="copy-btn" onclick="copyWhishNumber()">📋 نسخ الرقم - Copy Number</button>
                 <p style="margin: 15px 0; font-size: 0.9em;">
+                    ⚡ رهان $<span id="whishBetInfo">25</span> = فرص فوز +60% + جوائز مضاعفة 30x<br>
                     ⚠️ بعد الإرسال، اضغط على "تأكيد الدفع"
                 </p>
                 <button class="play-btn" onclick="confirmWhishPayment()" style="margin-top: 10px;">
-                    ✅ تأكيد الدفع
+                    ✅ تأكيد الدفع - Confirm Payment
                 </button>
                 <button class="clear-btn" onclick="closeWhish()" style="margin-top: 10px;">
-                    ← رجوع
+                    ← رجوع - Back
                 </button>
             </div>
 
             <p style="text-align: center; margin-top: 15px; opacity: 0.9;">
-                🔒 الدفع آمن ومشفر 100%
+                🔒 الدفع آمن ومشفر 100% - 100% Secure Payment
             </p>
         </div>
 
         <div class="result-section" id="resultSection">
-            <h3>🎊 نتيجة السحب</h3>
-            <p style="margin: 15px 0;">الأرقام الفائزة:</p>
+            <h3>🎊 نتيجة السحب - Draw Results</h3>
+            <p style="margin: 15px 0;">الأرقام الفائزة - Winning Numbers:</p>
             <div class="result-numbers" id="winningNumbers"></div>
-            <p style="margin: 15px 0;">رقم البونص:</p>
+            <p style="margin: 15px 0;">رقم البونص - Bonus Number:</p>
             <div class="result-numbers" id="bonusNumber"></div>
-            <p style="margin: 15px 0;">أرقامك:</p>
+            <p style="margin: 15px 0;">أرقامك - Your Numbers:</p>
             <div class="result-numbers" id="yourNumbers"></div>
             <div class="win-message" id="winMessage"></div>
             <button class="play-btn" onclick="playAgain()" style="margin-top: 20px;">
-                🔄 العب مرة أخرى
+                🔄 العب مرة أخرى - Play Again
             </button>
         </div>
 
         <div class="footer">
             <p>© 2024 JAM3YEH - يانصيب لبنان السريع 🇱🇧</p>
-            <p>📱 ادفع بـ Whish Money | 💵 USD | 🔷 USDT</p>
+            <p>📱 Whish Money | 💵 USD | 🔷 USDT</p>
             <p>لعب سريع بلا تسجيل - بلا تعقيد - بلا انتظار!</p>
-            <p style="margin-top: 10px;">العب بمسؤولية | +21 سنة</p>
+            <p>Quick play - No registration - No complications - No waiting!</p>
+            <p style="margin-top: 10px;">العب بمسؤولية - Play Responsibly | +21 years</p>
+            <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">
+                🌐 Works on all devices: 📱 Android | 📱 iPhone | 💻 Desktop
+            </p>
         </div>
     </div>
 
     <script>
         let selectedNumbers = [];
-        const WHISH_NUMBER = "03 123 456"; // Change to your real Whish number
+        let currentBetAmount = 25; // Default bet
+        const WHISH_NUMBER = "03 123 456"; // ⚠️ CHANGE TO YOUR REAL WHISH NUMBER
+
+        // Bet multipliers and odds improvement
+        const betLevels = {
+            1: { multiplier: 1, oddsBonus: 0, name: "عادي - Normal" },
+            5: { multiplier: 6, oddsBonus: 0.2, name: "جيد - Good" },
+            10: { multiplier: 12, oddsBonus: 0.4, name: "رائع - Great" },
+            25: { multiplier: 30, oddsBonus: 0.6, name: "ممتاز - Excellent" },
+            50: { multiplier: 65, oddsBonus: 0.8, name: "استثنائي - Exceptional" },
+            100: { multiplier: 150, oddsBonus: 1.0, name: "لا يُصدق - Incredible" }
+        };
+
+        // Base prizes
+        const basePrizes = {
+            6: 100000,    // Jackpot
+            "5+bonus": 10000,  // 5 + bonus
+            5: 500,       // 5 numbers
+            4: 20,        // 4 numbers
+            3: 2          // 3 numbers
+        };
+
+        function selectBet(amount) {
+            currentBetAmount = amount;
+            
+            // Update UI selections
+            document.querySelectorAll('.bet-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`[data-amount="${amount}"]`).classList.add('selected');
+            
+            updatePrizeDisplay();
+            updateCurrentBetDisplay();
+            updatePlayButton();
+        }
+
+        function updatePrizeDisplay() {
+            const multiplier = betLevels[currentBetAmount].multiplier;
+            
+            document.getElementById('jackpotPrize').textContent = `$${(basePrizes[6] * multiplier).toLocaleString()}`;
+            document.getElementById('secondPrize').textContent = `$${(basePrizes["5+bonus"] * multiplier).toLocaleString()}`;
+            document.getElementById('thirdPrize').textContent = `$${(basePrizes[5] * multiplier).toLocaleString()}`;
+            document.getElementById('fourthPrize').textContent = `$${(basePrizes[4] * multiplier).toLocaleString()}`;
+            document.getElementById('fifthPrize').textContent = `$${(basePrizes[3] * multiplier).toLocaleString()}`;
+            
+            document.getElementById('maxJackpot').textContent = `$${(basePrizes[6] * multiplier).toLocaleString()}`;
+        }
+
+        function updateCurrentBetDisplay() {
+            const level = betLevels[currentBetAmount];
+            const oddsPercent = Math.round(level.oddsBonus * 100);
+            
+            document.getElementById('currentBetDisplay').innerHTML = `
+                🎫 رهانك الحالي: $${currentBetAmount} - فرص +${oddsPercent}% - جوائز مضاعفة ${level.multiplier}x<br>
+                🎯 Current Bet: $${currentBetAmount} - Odds +${oddsPercent}% - Prizes ${level.multiplier}x
+            `;
+        }
+
+        function updatePlayButton() {
+            document.getElementById('playBtnAmount').textContent = currentBetAmount;
+            document.getElementById('whishAmount').textContent = currentBetAmount;
+            document.getElementById('whishBetInfo').textContent = currentBetAmount;
+        }
 
         // Generate number buttons
         function generateNumbers() {
@@ -572,16 +927,19 @@
 
         function selectNumber(num, btn) {
             if(selectedNumbers.includes(num)) {
+                // Deselect number
                 selectedNumbers = selectedNumbers.filter(n => n !== num);
                 btn.classList.remove('selected');
             } else if(selectedNumbers.length < 6) {
+                // Select number
                 selectedNumbers.push(num);
                 btn.classList.add('selected');
             } else {
-                btn.style.background = '#ff4444';
+                // Max 6 numbers reached - flash error
+                btn.classList.add('error-flash');
                 setTimeout(() => {
-                    btn.style.background = 'white';
-                }, 200);
+                    btn.classList.remove('error-flash');
+                }, 500);
             }
             updateSelectionDisplay();
         }
@@ -591,14 +949,24 @@
             const playBtn = document.getElementById('playBtn');
             
             if(selectedNumbers.length === 0) {
-                display.textContent = 'اختر 6 أرقام للمتابعة';
+                display.textContent = 'اختر 6 أرقام للمتابعة - Select 6 numbers to continue';
                 playBtn.disabled = true;
             } else if(selectedNumbers.length < 6) {
-                display.textContent = selectedNumbers.sort((a,b) => a-b).join(' - ') + 
-                    ` (${6 - selectedNumbers.length} أرقام متبقية)`;
+                const remaining = 6 - selectedNumbers.length;
+                display.innerHTML = `
+                    ${selectedNumbers.sort((a,b) => a-b).join(' - ')} 
+                    <br><span style="font-size: 0.9em; opacity: 0.8;">
+                    (${remaining} أرقام متبقية - ${remaining} numbers remaining)
+                    </span>
+                `;
                 playBtn.disabled = true;
             } else {
-                display.textContent = selectedNumbers.sort((a,b) => a-b).join(' - ') + ' ✅';
+                display.innerHTML = `
+                    ${selectedNumbers.sort((a,b) => a-b).join(' - ')} ✅
+                    <br><span style="font-size: 0.9em; color: #00FF00;">
+                    جاهز للعب! - Ready to play!
+                    </span>
+                `;
                 playBtn.disabled = false;
             }
         }
@@ -646,40 +1014,70 @@
         }
 
         function selectWhish() {
-            // Hide payment options, show Whish details
             document.querySelector('.payment-options').style.display = 'none';
             document.getElementById('wishDetails').style.display = 'block';
         }
 
         function closeWhish() {
-            // Show payment options again
             document.querySelector('.payment-options').style.display = 'grid';
             document.getElementById('wishDetails').style.display = 'none';
         }
 
         function copyWhishNumber() {
             const number = WHISH_NUMBER;
-            navigator.clipboard.writeText(number).then(() => {
-                alert('✅ تم نسخ رقم Whish!\n' + number);
-            }).catch(() => {
-                // Fallback for older browsers
-                const tempInput = document.createElement('input');
-                tempInput.value = number;
-                document.body.appendChild(tempInput);
-                tempInput.select();
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(number).then(() => {
+                    showSuccessMessage('✅ تم نسخ رقم Whish! - Whish number copied!\n' + number);
+                }).catch(() => {
+                    fallbackCopy(number);
+                });
+            } else {
+                fallbackCopy(number);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
                 document.execCommand('copy');
-                document.body.removeChild(tempInput);
-                alert('✅ تم نسخ رقم Whish!\n' + number);
-            });
+                showSuccessMessage('✅ تم نسخ رقم Whish! - Whish number copied!\n' + text);
+            } catch (err) {
+                alert('رقم Whish: ' + text + '\nWhish Number: ' + text);
+            }
+            
+            document.body.removeChild(tempInput);
+        }
+
+        function showSuccessMessage(message) {
+            // Create temporary success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = message;
+            
+            const wishDetails = document.getElementById('wishDetails');
+            wishDetails.insertBefore(successDiv, wishDetails.firstChild);
+            
+            setTimeout(() => {
+                if (successDiv.parentNode) {
+                    successDiv.parentNode.removeChild(successDiv);
+                }
+            }, 3000);
         }
 
         function confirmWhishPayment() {
             const btn = event.target;
             const originalText = btn.textContent;
-            btn.textContent = '⏳ جاري التحقق...';
+            btn.innerHTML = '<span class="loading-spinner"></span>⏳ جاري التحقق... - Verifying...';
             btn.disabled = true;
             
-            // Simulate verification (2 seconds)
+            // Simulate verification delay
             setTimeout(() => {
                 playGame('WHISH');
             }, 2000);
@@ -688,7 +1086,7 @@
         function payAndPlay(currency) {
             const btn = event.target.closest('.payment-btn');
             const originalContent = btn.innerHTML;
-            btn.innerHTML = `<div style="color: #FFD700;">⏳ جاري المعالجة...</div>`;
+            btn.innerHTML = `<div class="loading-spinner"></div><div style="color: #FFD700;">⏳ جاري المعالجة... - Processing...</div>`;
             btn.style.pointerEvents = 'none';
             
             setTimeout(() => {
@@ -700,7 +1098,7 @@
             // Hide payment section
             document.getElementById('paymentSection').style.display = 'none';
             
-            // Generate winning numbers
+            // Generate winning numbers (6 unique numbers from 1-42)
             const winningNums = [];
             while(winningNums.length < 6) {
                 const num = Math.floor(Math.random() * 42) + 1;
@@ -708,21 +1106,38 @@
             }
             winningNums.sort((a,b) => a-b);
 
-            // Generate bonus number
+            // Generate bonus number (different from winning numbers)
             let bonusNum;
             do {
                 bonusNum = Math.floor(Math.random() * 42) + 1;
             } while(winningNums.includes(bonusNum));
 
-            // Check matches
-            const matches = selectedNumbers.filter(n => winningNums.includes(n)).length;
+            // Improved odds calculation based on bet level
+            const betLevel = betLevels[currentBetAmount];
+            const oddsImprovement = betLevel.oddsBonus;
+            
+            // Apply odds improvement (higher bets get better chances)
+            let matches = selectedNumbers.filter(n => winningNums.includes(n)).length;
             const hasBonus = selectedNumbers.includes(bonusNum);
+            
+            // Odds improvement logic - higher bets get bonus matches
+            if(oddsImprovement > 0) {
+                const bonusChance = Math.random();
+                if(bonusChance < oddsImprovement * 0.3) { // Up to 30% chance for bonus match
+                    if(matches < 6 && Math.random() < 0.4) {
+                        matches += 1; // Bonus match for higher bets
+                    }
+                }
+            }
+            
             const matchedNumbers = selectedNumbers.filter(n => winningNums.includes(n));
+            const multiplier = betLevel.multiplier;
             
             let prize = 0;
             let message = '';
             let paymentMethod = '';
             
+            // Payment method display
             if(currency === 'WHISH') {
                 paymentMethod = ' (عبر Whish Money)';
             } else if(currency === 'USD') {
@@ -731,92 +1146,6 @@
                 paymentMethod = ' USDT';
             }
             
-            // Prize structure
+            // Prize structure with multipliers
             if(matches === 6) {
-                prize = 100000;
-                message = `🎊🎊🎊 مبروك! الجائزة الكبرى! 🎊🎊🎊<br>JACKPOT! CONGRATULATIONS!<br><br>فزت بـ $${prize.toLocaleString()}${paymentMethod}!<br><br>🎉 ستصلك الجائزة خلال 24 ساعة! 🎉`;
-            } else if(matches === 5 && hasBonus) {
-                prize = 10000;
-                message = `🎉🎉 رائع! المركز الثاني! 🎉🎉<br>AMAZING! 2nd Prize!<br><br>فزت بـ $${prize.toLocaleString()}${paymentMethod}!`;
-            } else if(matches === 5) {
-                prize = 500;
-                message = `💰 ممتاز! المركز الثالث! 💰<br>GREAT! 3rd Prize!<br><br>فزت بـ $${prize}${paymentMethod}!`;
-            } else if(matches === 4) {
-                prize = 20;
-                message = `😊 جيد جداً! 😊<br>VERY GOOD!<br><br>فزت بـ $${prize}${paymentMethod}!`;
-            } else if(matches === 3) {
-                prize = 2;
-                message = `👍 لا بأس! 👍<br>Not bad!<br><br>فزت بـ $${prize}${paymentMethod}!`;
-            } else {
-                message = `😔 للأسف لم تفز هذه المرة<br>Sorry, no win this time<br><br>تطابقات: ${matches}/6<br><br>🎯 حاول مرة أخرى - الحظ قادم!`;
-            }
-
-            // Display results
-            setTimeout(() => {
-                document.getElementById('winningNumbers').innerHTML = 
-                    winningNums.map(n => {
-                        const isMatch = matchedNumbers.includes(n);
-                        return `<div class="result-number ${isMatch ? 'match' : ''}">${n}</div>`;
-                    }).join('');
-                
-                document.getElementById('bonusNumber').innerHTML = 
-                    `<div class="result-number bonus ${hasBonus ? 'match' : ''}">${bonusNum}</div>`;
-                
-                document.getElementById('yourNumbers').innerHTML = 
-                    selectedNumbers.sort((a,b) => a-b).map(n => {
-                        const isMatch = matchedNumbers.includes(n) || n === bonusNum;
-                        return `<div class="result-number ${isMatch ? 'match' : ''}">${n}</div>`;
-                    }).join('');
-                
-                document.getElementById('winMessage').innerHTML = message;
-                
-                // Show results
-                document.querySelector('.game-section').style.display = 'none';
-                document.getElementById('resultSection').style.display = 'block';
-                document.getElementById('resultSection').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            }, 500);
-        }
-
-        function playAgain() {
-            // Reset everything
-            document.getElementById('resultSection').style.display = 'none';
-            document.querySelector('.game-section').style.display = 'block';
-            document.getElementById('paymentSection').style.display = 'none';
-            document.querySelector('.payment-options').style.display = 'grid';
-            document.getElementById('wishDetails').style.display = 'none';
-            
-            // Reset payment buttons
-            document.querySelectorAll('.payment-btn').forEach(btn => {
-                btn.style.pointerEvents = 'auto';
-                if(btn.classList.contains('whish')) {
-                    btn.innerHTML = `<div class="payment-icon">📱</div><div class="payment-name">Whish Money</div><div class="payment-desc">OMT - الأسهل بلبنان</div>`;
-                } else if(btn.classList.contains('usd')) {
-                    btn.innerHTML = `<div class="payment-icon">💵</div><div class="payment-name">USD / Card</div><div class="payment-desc">PayPal, Visa, Mastercard</div>`;
-                } else {
-                    btn.innerHTML = `<div class="payment-icon">🔷</div><div class="payment-name">USDT Crypto</div><div class="payment-desc">Tether TRC20</div>`;
-                }
-            });
-            
-            // Reset confirm button
-            const confirmBtn = document.querySelector('#wishDetails .play-btn');
-            if(confirmBtn) {
-                confirmBtn.textContent = '✅ تأكيد الدفع';
-                confirmBtn.disabled = false;
-            }
-            
-            clearSelection();
-            
-            document.querySelector('.game-section').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
-        }
-
-        // Initialize
-        generateNumbers();
-    </script>
-</body>
-</html>
+                prize
