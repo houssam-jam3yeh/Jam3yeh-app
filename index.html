@@ -34,10 +34,104 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             margin: 10px 0;
         }
+        .admin-badge {
+            background: #FF4444;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
         .balance {
             font-size: 1.3em;
             color: #FFD700;
             margin: 10px 0;
+        }
+        .jackpot-display {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #006633;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 6px 25px rgba(255, 215, 0, 0.8); }
+        }
+        .admin-section {
+            background: rgba(255, 68, 68, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #FF4444;
+        }
+        .admin-login {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .admin-login input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #FFD700;
+            font-size: 1em;
+        }
+        .admin-login button {
+            padding: 10px 20px;
+            background: #FF4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .prize-table {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .prize-table h3 {
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .prize-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            align-items: center;
+        }
+        .prize-row.jackpot {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(255, 165, 0, 0.4));
+            border: 3px solid #FFD700;
+            font-weight: bold;
+        }
+        .prize-row.second {
+            background: rgba(255, 215, 0, 0.25);
+            border: 2px solid #FFD700;
+        }
+        .match-count {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .prize-amount {
+            color: #FFD700;
+            font-size: 1.4em;
+            font-weight: bold;
         }
         .ticket-section {
             background: rgba(255, 255, 255, 0.05);
@@ -50,15 +144,12 @@
             margin-bottom: 15px;
             font-size: 1.3em;
         }
-        select {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1em;
-            border: 2px solid #FFD700;
-            border-radius: 10px;
-            background: white;
-            color: #006633;
-            cursor: pointer;
+        .ticket-price-display {
+            text-align: center;
+            font-size: 1.5em;
+            color: #FFD700;
+            margin: 15px 0;
+            font-weight: bold;
         }
         .numbers-grid {
             display: grid;
@@ -159,6 +250,14 @@
             font-size: 1.3em;
             font-weight: bold;
         }
+        .result-number.match {
+            background: #FFD700;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
         .win-message {
             font-size: 2em;
             color: #FFD700;
@@ -186,7 +285,7 @@
         }
         @media (max-width: 600px) {
             .numbers-grid {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(6, 1fr);
                 gap: 8px;
             }
             .number-btn {
@@ -201,22 +300,70 @@
     <div class="container">
         <div class="header">
             <h1>🇱🇧 JAM3YEH 🇱🇧</h1>
-            <p>يانصيب لبنان الرقمي - اربح المال اونلاين</p>
+            <p>يانصيب لبنان الرقمي - مثل اللوتو اللبناني الحقيقي!</p>
             <div class="balance">رصيدك: $<span id="balance">0</span></div>
+            <div id="adminBadge" style="display:none;">
+                <span class="admin-badge">🔑 وضع المسؤول - ADMIN MODE</span>
+            </div>
+        </div>
+
+        <div class="jackpot-display">
+            🎰 الجائزة الكبرى: $<span id="jackpotAmount">152,847</span> 🎰
+        </div>
+
+        <div class="admin-section">
+            <h3>🔐 دخول المسؤول / Admin Login</h3>
+            <div id="adminLoginForm">
+                <div class="admin-login">
+                    <input type="password" id="adminPassword" placeholder="كلمة سر المسؤول / Admin Password">
+                    <button onclick="adminLogin()">دخول</button>
+                </div>
+                <small>💡 كمسؤول: العب مجاناً واختبر النظام</small>
+            </div>
+            <div id="adminPanel" style="display:none;">
+                <p>✅ أنت الآن في وضع المسؤول - يمكنك اللعب مجاناً!</p>
+                <button onclick="adminLogout()" style="background:#ff4444; color:white; padding:10px; border-radius:8px; border:none; cursor:pointer;">خروج / Logout</button>
+            </div>
+        </div>
+
+        <div class="prize-table">
+            <h3>💰 جدول الجوائز - Lebanese Lottery Style</h3>
+            <div class="prize-row jackpot">
+                <span class="match-count">🎊 6 أرقام</span>
+                <span class="prize-amount">$100,000+</span>
+            </div>
+            <div class="prize-row second">
+                <span class="match-count">🎉 5 أرقام + بونص</span>
+                <span class="prize-amount">$50,000</span>
+            </div>
+            <div class="prize-row">
+                <span class="match-count">💰 5 أرقام</span>
+                <span class="prize-amount">$1,000</span>
+            </div>
+            <div class="prize-row">
+                <span class="match-count">😊 4 أرقام</span>
+                <span class="prize-amount">$50</span>
+            </div>
+            <div class="prize-row">
+                <span class="match-count">👍 3 أرقام</span>
+                <span class="prize-amount">$1.10 (استرجاع)</span>
+            </div>
+            <div class="prize-row" style="opacity: 0.6;">
+                <span class="match-count">😔 0-2 أرقام</span>
+                <span class="prize-amount">خسارة / Loss</span>
+            </div>
         </div>
 
         <div class="ticket-section">
-            <h3>🎰 العب واربح الآن!</h3>
-            <label>سعر التذكرة:</label>
-            <select id="ticketPrice">
-                <option value="1">$1 - جائزة حتى 100$</option>
-                <option value="5">$5 - جائزة حتى 500$</option>
-                <option value="10">$10 - جائزة حتى 1000$</option>
-            </select>
+            <h3>🎰 اشتري تذكرتك الآن!</h3>
+            <div class="ticket-price-display">
+                سعر التذكرة: $1.10
+            </div>
+            <p style="text-align: center; opacity: 0.9;">اختر 6 أرقام من 42 - مثل اللوتو اللبناني!</p>
         </div>
 
         <div class="ticket-section">
-            <h3>اختر أرقامك المحظوظة (6 أرقام):</h3>
+            <h3>اختر أرقامك المحظوظة (6 أرقام من 42):</h3>
             <div class="numbers-grid" id="numbersGrid"></div>
         </div>
 
@@ -235,6 +382,8 @@
             <h3>🎊 نتيجة السحب</h3>
             <p>الأرقام الفائزة:</p>
             <div class="result-numbers" id="winningNumbers"></div>
+            <p>رقم البونص:</p>
+            <div class="result-numbers" id="bonusNumber"></div>
             <p>أرقامك:</p>
             <div class="result-numbers" id="yourNumbers"></div>
             <div class="win-message" id="winMessage"></div>
@@ -255,10 +404,15 @@
                 <span>إجمالي الأرباح:</span>
                 <span>$<span id="totalWinnings">0</span></span>
             </div>
+            <div class="stat-item">
+                <span>إجمالي المصروف:</span>
+                <span>$<span id="totalSpent">0</span></span>
+            </div>
         </div>
 
         <div class="footer">
-            <p>© 2024 JAM3YEH - صنع بحب في لبنان 🇱🇧</p>
+            <p>© 2024 JAM3YEH - يانصيب لبنان الرقمي 🇱🇧</p>
+            <p>مستوحى من اللوتو اللبناني الحقيقي</p>
             <p>العب بمسؤولية | +21 سنة</p>
         </div>
     </div>
@@ -269,11 +423,43 @@
         let gamesPlayed = 0;
         let wins = 0;
         let totalWinnings = 0;
+        let totalSpent = 0;
+        let isAdmin = false;
+        let jackpot = 152847; // Starting jackpot
+        const ADMIN_PASSWORD = "JAM3YEH2024";
+        const TICKET_PRICE = 1.10;
 
-        // Generate number buttons
+        // Update jackpot display
+        function updateJackpot() {
+            document.getElementById('jackpotAmount').textContent = jackpot.toLocaleString();
+        }
+
+        // Admin Functions
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if(password === ADMIN_PASSWORD) {
+                isAdmin = true;
+                document.getElementById('adminLoginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                document.getElementById('adminBadge').style.display = 'block';
+                alert('✅ تم الدخول كمسؤول! يمكنك الآن اللعب مجاناً');
+            } else {
+                alert('❌ كلمة سر خاطئة!');
+            }
+        }
+
+        function adminLogout() {
+            isAdmin = false;
+            document.getElementById('adminLoginForm').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminBadge').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Generate 42 number buttons (like real Lebanese lottery)
         function generateNumbers() {
             const grid = document.getElementById('numbersGrid');
-            for(let i = 1; i <= 49; i++) {
+            for(let i = 1; i <= 42; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'number-btn';
                 btn.textContent = i;
@@ -293,107 +479,4 @@
             updateDisplay();
         }
 
-        function updateDisplay() {
-            const display = document.getElementById('selectedNumbers');
-            const playBtn = document.getElementById('playBtn');
-            
-            if(selectedNumbers.length === 0) {
-                display.textContent = 'لم تختر أي رقم بعد';
-                playBtn.disabled = true;
-            } else {
-                display.textContent = selectedNumbers.sort((a,b) => a-b).join(' - ');
-                playBtn.disabled = selectedNumbers.length !== 6;
-            }
-        }
-
-        function randomPick() {
-            clearSelection();
-            const buttons = document.querySelectorAll('.number-btn');
-            while(selectedNumbers.length < 6) {
-                const num = Math.floor(Math.random() * 49) + 1;
-                if(!selectedNumbers.includes(num)) {
-                    selectedNumbers.push(num);
-                    buttons[num-1].classList.add('selected');
-                }
-            }
-            updateDisplay();
-        }
-
-        function clearSelection() {
-            selectedNumbers = [];
-            document.querySelectorAll('.number-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            updateDisplay();
-        }
-
-        function playGame() {
-            const ticketPrice = parseInt(document.getElementById('ticketPrice').value);
-            const winningNums = [];
-            
-            while(winningNums.length < 6) {
-                const num = Math.floor(Math.random() * 49) + 1;
-                if(!winningNums.includes(num)) winningNums.push(num);
-            }
-            winningNums.sort((a,b) => a-b);
-
-            const matches = selectedNumbers.filter(n => winningNums.includes(n)).length;
-            
-            let prize = 0;
-            let message = '';
-            
-            if(matches === 6) {
-                prize = ticketPrice * 100;
-                message = '🎊 مبروك! فزت بالجائزة الكبرى! 🎊';
-            } else if(matches === 5) {
-                prize = ticketPrice * 50;
-                message = '🎉 ممتاز! فزت بجائزة كبيرة! 🎉';
-            } else if(matches === 4) {
-                prize = ticketPrice * 10;
-                message = '😊 جيد! فزت بجائزة! 😊';
-            } else if(matches === 3) {
-                prize = ticketPrice * 5;
-                message = '👍 لا بأس! فزت بمبلغ صغير! 👍';
-            } else {
-                message = '😔 لم تفز هذه المرة. جرب مرة أخرى! 😔';
-            }
-
-            // Update stats
-            gamesPlayed++;
-            if(prize > 0) {
-                wins++;
-                totalWinnings += prize;
-                balance += prize;
-            }
-            balance -= ticketPrice;
-
-            // Display results
-            document.getElementById('winningNumbers').innerHTML = 
-                winningNums.map(n => `<div class="result-number">${n}</div>`).join('');
-            document.getElementById('yourNumbers').innerHTML = 
-                selectedNumbers.sort((a,b) => a-b).map(n => `<div class="result-number">${n}</div>`).join('');
-            document.getElementById('winMessage').innerHTML = 
-                `${message}<br>تطابقات: ${matches}/6<br>الربح: $${prize}`;
-            
-            document.getElementById('balance').textContent = balance;
-            document.getElementById('gamesPlayed').textContent = gamesPlayed;
-            document.getElementById('wins').textContent = wins;
-            document.getElementById('totalWinnings').textContent = totalWinnings;
-            
-            document.querySelector('.ticket-section').style.display = 'none';
-            document.querySelector('.action-buttons').style.display = 'none';
-            document.getElementById('resultSection').style.display = 'block';
-        }
-
-        function playAgain() {
-            document.getElementById('resultSection').style.display = 'none';
-            document.querySelector('.ticket-section').style.display = 'block';
-            document.querySelector('.action-buttons').style.display = 'flex';
-            clearSelection();
-        }
-
-        // Initialize
-        generateNumbers();
-    </script>
-</body>
-</html>
+        function update
