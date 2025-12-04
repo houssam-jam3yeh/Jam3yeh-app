@@ -4,93 +4,396 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAM3YEH - يانصيب لبنان الرقمي</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #006633 0%, #009900 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 10px 0;
+        }
+        .balance {
+            font-size: 1.3em;
+            color: #FFD700;
+            margin: 10px 0;
+        }
+        .ticket-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .ticket-section h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            background: white;
+            color: #006633;
+            cursor: pointer;
+        }
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .number-btn {
+            padding: 15px;
+            background: white;
+            color: #006633;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .number-btn:hover {
+            background: #FFD700;
+            transform: scale(1.1);
+        }
+        .number-btn.selected {
+            background: #FFD700;
+            color: #006633;
+            border-color: #FFA500;
+        }
+        .selected-display {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.5em;
+            min-height: 80px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        button {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .play-btn {
+            background: #FFD700;
+            color: #006633;
+        }
+        .play-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .random-btn {
+            background: #FFA500;
+            color: white;
+        }
+        .clear-btn {
+            background: #ff4444;
+            color: white;
+        }
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .result-section {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .result-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .result-number {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: #006633;
+            border: 3px solid #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .win-message {
+            font-size: 2em;
+            color: #FFD700;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .stats {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        @media (max-width: 600px) {
+            .numbers-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+            }
+            .number-btn {
+                padding: 12px;
+                font-size: 1em;
+            }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="logo">
-                <h1>🇱🇧 JAM3YEH 🇱🇧</h1>
-                <p>يانصيب لبنان الرقمي - اربح المال اونلاين</p>
+        <div class="header">
+            <h1>🇱🇧 JAM3YEH 🇱🇧</h1>
+            <p>يانصيب لبنان الرقمي - اربح المال اونلاين</p>
+            <div class="balance">رصيدك: $<span id="balance">0</span></div>
+        </div>
+
+        <div class="ticket-section">
+            <h3>🎰 العب واربح الآن!</h3>
+            <label>سعر التذكرة:</label>
+            <select id="ticketPrice">
+                <option value="1">$1 - جائزة حتى 100$</option>
+                <option value="5">$5 - جائزة حتى 500$</option>
+                <option value="10">$10 - جائزة حتى 1000$</option>
+            </select>
+        </div>
+
+        <div class="ticket-section">
+            <h3>اختر أرقامك المحظوظة (6 أرقام):</h3>
+            <div class="numbers-grid" id="numbersGrid"></div>
+        </div>
+
+        <div class="selected-display">
+            <div>أرقامك المختارة:</div>
+            <div id="selectedNumbers">لم تختر أي رقم بعد</div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="random-btn" onclick="randomPick()">🎲 اختيار عشوائي</button>
+            <button class="play-btn" id="playBtn" onclick="playGame()" disabled>🎮 العب الآن!</button>
+            <button class="clear-btn" onclick="clearSelection()">🗑️ مسح الأرقام</button>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display:none;">
+            <h3>🎊 نتيجة السحب</h3>
+            <p>الأرقام الفائزة:</p>
+            <div class="result-numbers" id="winningNumbers"></div>
+            <p>أرقامك:</p>
+            <div class="result-numbers" id="yourNumbers"></div>
+            <div class="win-message" id="winMessage"></div>
+            <button class="play-btn" onclick="playAgain()">🔄 العب مرة أخرى</button>
+        </div>
+
+        <div class="stats">
+            <h3>📊 إحصائياتك</h3>
+            <div class="stat-item">
+                <span>ألعاب لعبت:</span>
+                <span id="gamesPlayed">0</span>
             </div>
-            <div class="balance">
-                <span>رصيدك: $<span id="balance">0</span></span>
+            <div class="stat-item">
+                <span>مرات الفوز:</span>
+                <span id="wins">0</span>
             </div>
-        </header>
-
-        <main class="main-content">
-            <div class="lottery-section">
-                <h2>🎰 العب واربح الآن!</h2>
-                
-                <div class="ticket-price">
-                    <label>سعر التذكرة:</label>
-                    <select id="ticketPrice">
-                        <option value="1">$1 - جائزة حتى $100</option>
-                        <option value="5">$5 - جائزة حتى $500</option>
-                        <option value="10">$10 - جائزة حتى $1000</option>
-                        <option value="25">$25 - جائزة حتى $2500</option>
-                    </select>
-                </div>
-
-                <div class="numbers-grid">
-                    <h3>اختر أرقامك المحظوظة (6 أرقام):</h3>
-                    <div class="numbers" id="numbersGrid">
-                        <!-- Numbers 1-49 will be generated by JavaScript -->
-                    </div>
-                </div>
-
-                <div class="selected-numbers">
-                    <h4>أرقامك المختارة:</h4>
-                    <div id="selectedNumbers">لم تختر أي رقم بعد</div>
-                </div>
-
-                <div class="action-buttons">
-                    <button id="randomBtn">🎲 اختيار عشوائي</button>
-                    <button id="playBtn" disabled>🎮 العب الآن!</button>
-                    <button id="clearBtn">🗑️ مسح الأرقام</button>
-                </div>
+            <div class="stat-item">
+                <span>إجمالي الأرباح:</span>
+                <span>$<span id="totalWinnings">0</span></span>
             </div>
+        </div>
 
-            <div class="results-section" id="resultsSection" style="display: none;">
-                <h2>🎊 نتيجة السحب</h2>
-                <div class="winning-numbers">
-                    <h3>الأرقام الفائزة:</h3>
-                    <div id="winningNumbers"></div>
-                </div>
-                <div class="player-numbers">
-                    <h3>أرقامك:</h3>
-                    <div id="playerNumbers"></div>
-                </div>
-                <div class="result-message" id="resultMessage"></div>
-                <button id="playAgainBtn">🔄 العب مرة أخرى</button>
-            </div>
-
-            <div class="stats-section">
-                <h3>📊 إحصائياتك</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-label">ألعاب لعبت:</span>
-                        <span class="stat-value" id="gamesPlayed">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">مرات الفوز:</span>
-                        <span class="stat-value" id="wins">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">إجمالي الأرباح:</span>
-                        <span class="stat-value">$<span id="totalWinnings">0</span></span>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="footer">
+        <div class="footer">
             <p>© 2024 JAM3YEH - صنع بحب في لبنان 🇱🇧</p>
             <p>العب بمسؤولية | +21 سنة</p>
-        </footer>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let selectedNumbers = [];
+        let balance = 0;
+        let gamesPlayed = 0;
+        let wins = 0;
+        let totalWinnings = 0;
+
+        // Generate number buttons
+        function generateNumbers() {
+            const grid = document.getElementById('numbersGrid');
+            for(let i = 1; i <= 49; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'number-btn';
+                btn.textContent = i;
+                btn.onclick = () => selectNumber(i, btn);
+                grid.appendChild(btn);
+            }
+        }
+
+        function selectNumber(num, btn) {
+            if(selectedNumbers.includes(num)) {
+                selectedNumbers = selectedNumbers.filter(n => n !== num);
+                btn.classList.remove('selected');
+            } else if(selectedNumbers.length < 6) {
+                selectedNumbers.push(num);
+                btn.classList.add('selected');
+            }
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const display = document.getElementById('selectedNumbers');
+            const playBtn = document.getElementById('playBtn');
+            
+            if(selectedNumbers.length === 0) {
+                display.textContent = 'لم تختر أي رقم بعد';
+                playBtn.disabled = true;
+            } else {
+                display.textContent = selectedNumbers.sort((a,b) => a-b).join(' - ');
+                playBtn.disabled = selectedNumbers.length !== 6;
+            }
+        }
+
+        function randomPick() {
+            clearSelection();
+            const buttons = document.querySelectorAll('.number-btn');
+            while(selectedNumbers.length < 6) {
+                const num = Math.floor(Math.random() * 49) + 1;
+                if(!selectedNumbers.includes(num)) {
+                    selectedNumbers.push(num);
+                    buttons[num-1].classList.add('selected');
+                }
+            }
+            updateDisplay();
+        }
+
+        function clearSelection() {
+            selectedNumbers = [];
+            document.querySelectorAll('.number-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            updateDisplay();
+        }
+
+        function playGame() {
+            const ticketPrice = parseInt(document.getElementById('ticketPrice').value);
+            const winningNums = [];
+            
+            while(winningNums.length < 6) {
+                const num = Math.floor(Math.random() * 49) + 1;
+                if(!winningNums.includes(num)) winningNums.push(num);
+            }
+            winningNums.sort((a,b) => a-b);
+
+            const matches = selectedNumbers.filter(n => winningNums.includes(n)).length;
+            
+            let prize = 0;
+            let message = '';
+            
+            if(matches === 6) {
+                prize = ticketPrice * 100;
+                message = '🎊 مبروك! فزت بالجائزة الكبرى! 🎊';
+            } else if(matches === 5) {
+                prize = ticketPrice * 50;
+                message = '🎉 ممتاز! فزت بجائزة كبيرة! 🎉';
+            } else if(matches === 4) {
+                prize = ticketPrice * 10;
+                message = '😊 جيد! فزت بجائزة! 😊';
+            } else if(matches === 3) {
+                prize = ticketPrice * 5;
+                message = '👍 لا بأس! فزت بمبلغ صغير! 👍';
+            } else {
+                message = '😔 لم تفز هذه المرة. جرب مرة أخرى! 😔';
+            }
+
+            // Update stats
+            gamesPlayed++;
+            if(prize > 0) {
+                wins++;
+                totalWinnings += prize;
+                balance += prize;
+            }
+            balance -= ticketPrice;
+
+            // Display results
+            document.getElementById('winningNumbers').innerHTML = 
+                winningNums.map(n => `<div class="result-number">${n}</div>`).join('');
+            document.getElementById('yourNumbers').innerHTML = 
+                selectedNumbers.sort((a,b) => a-b).map(n => `<div class="result-number">${n}</div>`).join('');
+            document.getElementById('winMessage').innerHTML = 
+                `${message}<br>تطابقات: ${matches}/6<br>الربح: $${prize}`;
+            
+            document.getElementById('balance').textContent = balance;
+            document.getElementById('gamesPlayed').textContent = gamesPlayed;
+            document.getElementById('wins').textContent = wins;
+            document.getElementById('totalWinnings').textContent = totalWinnings;
+            
+            document.querySelector('.ticket-section').style.display = 'none';
+            document.querySelector('.action-buttons').style.display = 'none';
+            document.getElementById('resultSection').style.display = 'block';
+        }
+
+        function playAgain() {
+            document.getElementById('resultSection').style.display = 'none';
+            document.querySelector('.ticket-section').style.display = 'block';
+            document.querySelector('.action-buttons').style.display = 'flex';
+            clearSelection();
+        }
+
+        // Initialize
+        generateNumbers();
+    </script>
 </body>
 </html>
